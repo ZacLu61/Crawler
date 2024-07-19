@@ -52,29 +52,40 @@ class WebCrawler:
         return self.visited_urls
 
     def add_to_order_context(self, urls):
+        ordered_context = dict()
         for url in urls:
             extractor = TextExtractor(url)
             text = extractor.get_text_from_website()
             title = re.search("第.*章", text).group()
-            print(title)
+            # print(title)
             title_to_num = cn2an.cn2an(title[1:-1], "smart")
-            print(title_to_num)
-            self.order_context[title_to_num] = text
-        return self.order_context
+            # print(title_to_num)
+            ordered_context[title_to_num] = text
+        return ordered_context
         
         
 if __name__ == "__main__":
     base_url = "https://www.mei8888.com/%e7%ac%ac%e4%b8%80%e7%99%be%e5%85%ab%e5%8d%81%e5%9b%9b%e7%ab%a0-%e5%a0%82%e8%80%8c%e7%9a%87%e4%b9%8b%e7%9a%84%e5%81%8f%e6%84%9b/"
     crawler = WebCrawler(base_url)
-    visited_urls = crawler.crawl(max_pages=30)
-    # order_context = crawler.add_to_order_context(visited_urls)
+    visited_urls = crawler.crawl(max_pages=5)
+    order_context = crawler.add_to_order_context(visited_urls)
     
+    f = open("novel.txt", "w")
+    
+    # print("order_context")
+    # print(order_context)
     print("Visited URLs:")
-    # f = open("novel.txt", "w")
     
-    # for index in range(1, 1000):
-    for url in visited_urls:
-        print(url)
+    for index in range(1, 1000):
+        if index not in order_context:
+            continue
+        # print("index:{}".format(index))
+        # print(order_context[index])
+        f.write(order_context[index])
+    
+    
+    # for url in visited_urls:
+    #     print(url)
         
         # if index not in order_context:
         #     continue
@@ -87,4 +98,4 @@ if __name__ == "__main__":
         # break
         
     # f.write(text)    
-    # f.close()
+    f.close()
