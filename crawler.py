@@ -7,13 +7,13 @@ import cn2an
 from text_extractor import TextExtractor
 
 valid_url_header = "https://www.mei8888.com/%e"
-max_pages_count = 100
+max_pages_count = 5
 
 class WebCrawler:
     def __init__(self, base_url):
         self.base_url = base_url
         self.visited_urls = set()
-        # self.order_context = dict()
+        self.ordered_context = dict()
         self.urls_to_visit = [base_url]
 
     def fetch_page(self, url):
@@ -53,16 +53,18 @@ class WebCrawler:
         return self.visited_urls
 
     def add_to_order_context(self, urls):
-        ordered_context = dict()
+        self.ordered_context = dict()
         for url in urls:
             extractor = TextExtractor(url)
             text = extractor.get_text_from_website()
             title = re.search("第.*章", text).group()
-            # print(title)
+            # print("title", title)
             title_to_num = cn2an.cn2an(title[1:-1], "smart")
-            # print(title_to_num)
-            ordered_context[title_to_num] = text
-        return ordered_context
+            # print("title_to_num", title_to_num)
+            # title_reverse = cn2an.an2cn(title_to_num, "low")
+            # print("title_reverse", "第{}章！！！".format(title_reverse))
+            self.ordered_context[title_to_num] = text
+        return self.ordered_context
         
         
 if __name__ == "__main__":
@@ -82,6 +84,7 @@ if __name__ == "__main__":
             continue
         # print("index:{}".format(index))
         # print(order_context[index])
+        f.write("\n\n\n第{}章\n\n\n".format(cn2an.an2cn(index, "low")))
         f.write(order_context[index])
     
     
