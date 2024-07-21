@@ -67,3 +67,4 @@ class TextExtractor:
             self.visited_urls.add(current_url)
 
         return self.visited_urls
+    
