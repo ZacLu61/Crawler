@@ -67,10 +67,3 @@ class TextExtractor:
             self.visited_urls.add(current_url)
 
         return self.visited_urls
-
-# if __name__ == "__main__":
-#     base_url = "https://www.mei8888.com/category/%e5%8f%a4%e4%bb%a3%e8%a8%80%e6%83%85/%e9%8c%a6%e9%af%89%e5%a6%b9%e5%a6%b9%e4%b8%89%e6%ad%b2%e5%8d%8a%ef%bc%8c%e6%88%91%e6%98%af%e5%85%a8%e4%ba%ac%e5%9f%8e%e5%a4%a7%e4%bd%ac%e7%9a%84%e5%9c%98%e5%af%b5/#google_vignette"
-#     extractor = TextExtractor(base_url)
-#     text = extractor.get_text_from_website()
-#     print("Extracted Text:")
-#     print(text)

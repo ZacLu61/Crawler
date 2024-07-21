@@ -58,11 +58,7 @@ class WebCrawler:
             extractor = TextExtractor(url)
             text = extractor.get_text_from_website()
             title = re.search("第.*章", text).group()
-            # print("title", title)
             title_to_num = cn2an.cn2an(title[1:-1], "smart")
-            # print("title_to_num", title_to_num)
-            # title_reverse = cn2an.an2cn(title_to_num, "low")
-            # print("title_reverse", "第{}章！！！".format(title_reverse))
             self.ordered_context[title_to_num] = text
         return self.ordered_context
         
@@ -74,32 +70,12 @@ if __name__ == "__main__":
     order_context = crawler.add_to_order_context(visited_urls)
     
     f = open("novel.txt", "w")
-    
-    # print("order_context")
-    # print(order_context)
     print("Visited URLs:")
     
     for index in range(1, 1000):
         if index not in order_context:
             continue
-        # print("index:{}".format(index))
-        # print(order_context[index])
         f.write("\n\n\n第{}章\n\n\n".format(cn2an.an2cn(index, "low")))
         f.write(order_context[index])
-    
-    
-    # for url in visited_urls:
-    #     print(url)
         
-        # if index not in order_context:
-        #     continue
-        
-         
-        # extractor = TextExtractor(url)
-        # text = extractor.get_text_from_website()
-        # print("Extracted Text:")        
-        # print(text)
-        # break
-        
-    # f.write(text)    
     f.close()
