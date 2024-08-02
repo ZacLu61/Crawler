@@ -6,9 +6,9 @@ import cn2an
 
 from text_extractor import TextExtractor
 
-base_url = "https://www.mei8888.com/%e7%ac%ac%e4%b8%80%e7%99%be%e5%85%ab%e5%8d%81%e5%9b%9b%e7%ab%a0-%e5%a0%82%e8%80%8c%e7%9a%87%e4%b9%8b%e7%9a%84%e5%81%8f%e6%84%9b/"
+base_url = "https://www.mei8888.com/%e7%ac%ac1%e7%ab%a0-%e6%ad%b9%e6%af%92%e8%b3%a3%e5%ad%90/"
 valid_url_header = "https://www.mei8888.com/%e"
-max_pages_count = 5
+max_pages_count = 50
 
 class WebCrawler:
     def __init__(self, base_url):
