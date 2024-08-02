@@ -6,9 +6,9 @@ import cn2an
 
 from text_extractor import TextExtractor
 
-base_url = "https://www.mei8888.com/%e7%ac%ac1%e7%ab%a0-%e6%ad%b9%e6%af%92%e8%b3%a3%e5%ad%90/"
+# base_url = "https://www.mei8888.com/%e7%ac%ac1%e7%ab%a0-%e6%ad%b9%e6%af%92%e8%b3%a3%e5%ad%90/"
 valid_url_header = "https://www.mei8888.com/%e"
-max_pages_count = 50
+# max_pages_count = 50
 
 class WebCrawler:
     def __init__(self, base_url):
@@ -65,6 +65,11 @@ class WebCrawler:
         
         
 if __name__ == "__main__":
+    global base_url
+    base_url = input("請輸入網址：")
+    global max_pages_count
+    max_pages_count = int(input("請輸入最大頁數："))
+    
     crawler = WebCrawler(base_url)
     visited_urls = crawler.crawl(max_pages_count)
     order_context = crawler.add_to_order_context(visited_urls)
