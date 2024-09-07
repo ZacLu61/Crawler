@@ -1,1 +1,6 @@
 *.txt
+*.ps1
+*.cfg
+*.fish
+*.rst
+*.pyc
